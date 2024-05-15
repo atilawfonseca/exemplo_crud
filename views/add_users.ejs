@@ -1,0 +1,30 @@
+<%- include('partials/header')  %>
+    <main class=" container mt-3 pt-5">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-4">Adicionando novo usuário</h2>
+            </div>
+            <div class="col-12">
+                <form action="/add_users" method="post" id="add_form" enctype="multipart/form-data">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingNome" placeholder="Luiz Bernardo">
+                        <label for="floatingNome">Nome</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingEmail" placeholder="exemplo@dominio.com" required>
+                        <label for="floatingEmail">Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingTelefone" placeholder="exemplo@dominio.com" required>
+                        <label for="floatingTelefone">Telefone</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="file" class="form-control" id="floatingImage" placeholder="exemplo@dominio.com" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer')  %>

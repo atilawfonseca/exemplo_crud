@@ -1,0 +1,3 @@
+Multer é um middleware node. js para manipulação multipart/form-data , 
+que é usado principalmente para fazer upload de arquivos. Foi escrito em cima 
+npmdo busboy para máxima eficiência.
