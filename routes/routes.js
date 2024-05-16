@@ -43,8 +43,16 @@ router.post('/add', upload, async (req, res)=> {
 
 //paginas do site
 
-router.get('/', (req, res) => {
-    res.render('index', {title:"Pagina Inicial"});
+router.get('/', async (req, res) => {
+    try {
+        const users = await User.find().exec();
+        res.render('index', {
+            title: "Página Inicial",
+            users: users,
+        })
+    } catch (error) {
+        res.json({message: error.message})
+    }
 });
 
 router.get('/add_users', (req, res) => {
