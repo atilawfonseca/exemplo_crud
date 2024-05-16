@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const path = require('path');
+
 
 const app = express();
 const PORT = process.env.PORT || 4000; 
@@ -45,6 +47,10 @@ db.on("error", (error)=> {
 db.once("open", ()=> {
     console.log("banco de dados conectado!");
 })
+
+//para carregar as fotos de uploads
+app.use(express.static("uploads"));
+app.use(express.static(path.join(__dirname, 'scripts')));
 
 //usando rotas
 app.use("", require('./routes/routes'))
