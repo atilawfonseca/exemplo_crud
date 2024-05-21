@@ -15,6 +15,7 @@ usando o método POST ou PUT. */
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 /*
 O middleware express-session armazena os dados da sessão no servidor; ele salva apenas o 
@@ -58,3 +59,4 @@ app.use("", require('./routes/routes'))
 app.listen(PORT, () => {
     console.log(`Servidor iniciado na porta http://localhost:${PORT}`)
 })
+

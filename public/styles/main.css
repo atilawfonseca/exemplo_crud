@@ -1,0 +1,15 @@
+.dt-layout-row {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: .5em;
+    align-items: center;
+}
+.dt-layout-table{
+    width: 100%;
+}
+.dt-layout-cell {
+    width: 100%;
+}
+.dt-paging {
+    text-align: end;
+}
