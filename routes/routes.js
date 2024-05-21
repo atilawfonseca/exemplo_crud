@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/users');
 const multer = require('multer');
+const fs = require('fs');
 
 
 //upload de imagem
@@ -57,9 +58,42 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/add_users', (req, res) => {
+router.get('/add_users', async (req, res) => {
     //nome do arquivo
-    res.render('add_users', {title: "Adicionar usuário"})
+    res.render('add_users', { title: "Adicionar usuário" })
 })
+
+//editar usuário
+//depois dessa etapa precisa atualizar os dados do usuário
+router.get('/edit/:id', async (req, res) => {
+    let id = req.params.id;
+    try {
+        const user = await User.findById(id);
+        res.render("edit_users", {
+            title: "Editar usuario",
+            user: user,
+        })
+        
+    } catch (error) {
+        res.redirect('/');
+    }
+    
+})
+
+//atualizar rota do usuário
+router.post('/update/:id', upload, async (req, res) => {
+    let id = req.params.id; 
+    let new_image = '';
+
+    if(req.file) {
+        new_image = req.file.filename; 
+
+        try {
+            fs.unlinkSync("./uploads/"+req.)
+        } catch (error) {
+            
+        }
+    }
+} )
 
 module.exports = router; 

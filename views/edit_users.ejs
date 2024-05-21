@@ -1,0 +1,32 @@
+<%- include('partials/header')  %>
+    <main class=" container mt-3 pt-5">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-4">Editar usuário - <%= user.name %></h2>
+            </div>
+            <div class="col-12">
+                <form action="/update/<%= user._id %>" method="post" id="add_form" enctype="multipart/form-data">
+                    <div class="form-floating mb-3">
+                        <input name="name" type="text" class="form-control" value="<%= user.name %>" id="floatingNome" placeholder="Luiz Bernardo">
+                        <label for="floatingNome">Nome</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input name="email" type="text" class="form-control" value="<%= user.email %>" id="floatingEmail" placeholder="exemplo@dominio.com" required>
+                        <label for="floatingEmail">Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input name="phone" type="text" class="form-control" value="<%= user.telefone %>" id="floatingTelefone" placeholder="exemplo@dominio.com" required>
+                        <label for="floatingTelefone">Telefone</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input name="image" type="file" class="form-control" id="floatingImage" placeholder="exemplo@dominio.com" required>
+                        <img src="/<%= user.image %>"  width="100" class="img-thumbnail mt-1" alt="">
+                    </div>
+                    <input type="hidden" name="old_image" value="<%= user.image %>">
+                    <button type="submit" class="btn btn-success">Atualizar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer')  %>
