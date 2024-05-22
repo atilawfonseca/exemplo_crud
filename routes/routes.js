@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/users');
 const multer = require('multer');
 const fs = require('fs');
+const { type } = require('os');
 
 
 //upload de imagem
@@ -89,11 +90,62 @@ router.post('/update/:id', upload, async (req, res) => {
         new_image = req.file.filename; 
 
         try {
-            fs.unlinkSync("./uploads/"+req.)
+            fs.unlinkSync("./uploads/"+req.body.old_image);
         } catch (error) {
-            
+            console.log(error)
         }
     }
-} )
+    else {
+        new_image = req.body.old_image; 
+    }
+
+    try {
+        const result = await User.findByIdAndUpdate(id, {
+            name: req.body.name, 
+            email: req.body.email, 
+            telefone: req.body.phone, 
+            image: new_image, 
+        });
+
+        req.session.message = {
+            type: 'success', 
+            message: 'Usuário atualizado com sucesso.'
+        }
+        res.redirect('/')
+        
+        
+    } catch (error) {
+        res.json({message: error.message, type:'danger'})
+    }
+} ) 
+
+//DELETAR USUARIO
+router.get('/delete/:id', async (req, res)=> {
+    let id = req.params.id; 
+    try {
+        const result = await User.findByIdAndDelete(id);
+        
+        if (result.image != '') {
+            try {
+                fs.unlinkSync('./uploads/' + result.image);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        req.session.message = {
+            type: 'success',
+            message: 'Usuário deletado com sucesso!'
+        };
+        
+        res.redirect('/');
+    } catch (erro) {
+        res.json({
+            message: erro.message
+        });
+    }
+    
+
+})
 
 module.exports = router; 
