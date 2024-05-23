@@ -21,6 +21,28 @@ var upload = multer({
 }).single('image');
 
 
+
+
+
+//paginas do site
+
+router.get('/', async (req, res) => {
+    try {
+        const users = await User.find().exec();
+        res.render('index', {
+            title: "Página Inicial",
+            users: users,
+        })
+    } catch (error) {
+        res.json({message: error.message})
+    }
+});
+
+router.get('/add_users', async (req, res) => {
+    //nome do arquivo
+    res.render('add_users', { title: "Adicionar usuário" })
+})
+
 //inserir usuário no banco de dados
 router.post('/add', upload, async (req, res)=> {
     const user = new User({
@@ -42,26 +64,6 @@ router.post('/add', upload, async (req, res)=> {
         res.json({message: erro.message, type: "danger"})
     }
     
-})
-
-
-//paginas do site
-
-router.get('/', async (req, res) => {
-    try {
-        const users = await User.find().exec();
-        res.render('index', {
-            title: "Página Inicial",
-            users: users,
-        })
-    } catch (error) {
-        res.json({message: error.message})
-    }
-});
-
-router.get('/add_users', async (req, res) => {
-    //nome do arquivo
-    res.render('add_users', { title: "Adicionar usuário" })
 })
 
 //editar usuário
